@@ -1,5 +1,6 @@
 Source: xivo-consul-packaging
 Section: net
+Priority: optional
 Maintainer: XiVO Dev Team <dev@avencall.com>
 Build-Depends: unzip, wget
 Homepage: https://consul.io
