@@ -28,6 +28,6 @@ if [[ $ret_code != 0 ]]; then
     exit $ret_code
 fi
 
-unzip $FILENAME
+unzip -o $FILENAME
 
 echo "Done"
