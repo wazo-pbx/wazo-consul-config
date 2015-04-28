@@ -5,4 +5,8 @@ Homepage: https://consul.io
 
 Package: consul
 Architecture: i386
-Description: Consul is a tool for discovering and configuring services in your infrastructure.
+Description: tool for discovering and configuring services
+ Consul has multiple components, but as a whole, it is a tool for discovering and
+ configuring services in your infrastructure. It provides several key features,
+ service discovery, health checking, key/value store and multi datacenter.
+ .
