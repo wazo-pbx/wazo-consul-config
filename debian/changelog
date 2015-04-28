@@ -1,0 +1,5 @@
+xivo-consul-packaging (0.5.0+xivo-15.09~20150428-1) xivo-dev; urgency=low
+
+  * Initial release.
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Tue, 28 Apr 2015 08:13:26 -0400

@@ -1,0 +1,6 @@
+Source: xivo-consul-packaging
+Maintainer: XiVO Dev Team <dev@avencall.com>
+
+Package: consul
+Architecture: i386
+Description: Consul is a tool for discovering and configuring services in your infrastructure.
