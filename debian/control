@@ -1,6 +1,7 @@
 Source: xivo-consul-packaging
 Maintainer: XiVO Dev Team <dev@avencall.com>
 Build-Depends: unzip, wget
+Homepage: https://consul.io
 
 Package: consul
 Architecture: i386
