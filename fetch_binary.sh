@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Copyright (C) 2015 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,20 +14,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-BASE_URL="https://dl.bintray.com/mitchellh/consul"
+set -e
+
 VERSION=$(cat VERSION)
 FILENAME=${VERSION}_linux_386.zip
-URL=${BASE_URL}/${FILENAME}
+URL="https://dl.bintray.com/mitchellh/consul/${FILENAME}"
 
-wget -nc $URL
-sha256sum --status -c <(grep linux_386 ${VERSION}_SHA256SUMS)
-ret_code=$?
-if [[ $ret_code != 0 ]]; then
-    >&2 echo "sha256sum did not match"
-    echo "Check that the SHA256SUMS file matches the VERSION you are downloading"
-    exit $ret_code
+rm -rf tmp
+mkdir tmp
+cd tmp
+
+wget -nv -O "${FILENAME}" "${URL}"
+if ! sha256sum --status -c ../SHA256SUM ; then
+    echo "sha256sum did not match" >&2
+    exit 1
 fi
 
-unzip -o $FILENAME
-
-echo "Done"
+unzip "${FILENAME}"
