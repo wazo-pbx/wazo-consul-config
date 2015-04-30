@@ -1,0 +1,8 @@
+#! /bin/sh
+
+if [ "$1" = purge ]; then
+    rm -rf /etc/consul
+    rm -rf /usr/lib/consul 
+fi
+
+#DEBHELPER#
