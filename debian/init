@@ -13,10 +13,10 @@
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 DAEMONNAME=consul
 DAEMON=/usr/bin/$DAEMONNAME
-PIDFILE=/var/run/$DAEMONNAME.pid
+PIDFILE=/var/run/$DAEMONNAME/$DAEMONNAME.pid
 SCRIPTNAME=/etc/init.d/$DAEMONNAME
-DAEMON_ARGS="agent -syslog -bootstrap -server -client 127.0.0.1 -config-dir /etc/consul -data-dir /usr/lib/consul -pid-file ${PIDFILE}"
-USER=root
+DAEMON_ARGS="agent -server -client 127.0.0.1 -config-dir /etc/consul -pid-file ${PIDFILE}"
+USER=consul
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0

@@ -1,8 +1,10 @@
 #! /bin/sh
 
 if [ "$1" = purge ]; then
+    userdel -r consul 2>/dev/null || true
     rm -rf /etc/consul
-    rm -rf /usr/lib/consul 
+    rm -rf /usr/lib/consul
+    rm -rf /var/run/consul
 fi
 
 #DEBHELPER#

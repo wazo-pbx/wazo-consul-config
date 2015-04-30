@@ -7,28 +7,73 @@ set -e
 
 MASTER_TOKEN_FILE="/usr/lib/consul/master_token"
 CONSUL_CONFIG_FILE="/etc/consul/config.json"
+DEFAULT_CONSUL_CONFIG="/usr/lib/consul/default_xivo_consul_config.yml"
+PIDFILE=/var/run/consul/consul.pid
+USER=consul
+GROUP=${USER}
 
 case "$1" in
     configure)
+        # add user consul
+        if ! getent passwd ${USER} > /dev/null ; then
+                echo "Adding system user for ${USER}" 1>&2
+                adduser --system --group --quiet \
+                        --shell /bin/sh \
+                        --home /var/lib/${USER} \
+                        --no-create-home --disabled-login \
+                        --gecos "Consul discovery service" \
+                        ${USER}
+        fi
+
+        # Change ownership to consul:consul
+        chown -R ${USER}:${GROUP} /etc/consul
+        chown -R ${USER}:${GROUP} /usr/lib/consul
+        chown -R ${USER}:${GROUP} /var/run/consul
+
+        # Create the master token file
         if [ ! -f ${MASTER_TOKEN_FILE} ]; then
             touch ${MASTER_TOKEN_FILE}
+            chown ${USER}:${GROUP} ${MASTER_TOKEN_FILE}
             chmod 600 ${MASTER_TOKEN_FILE}
             token=$(od -An -tx4 -N32 -w /dev/urandom | tr -d " ")
             echo ${token} > ${MASTER_TOKEN_FILE}
         fi
 
+        token=$(cat ${MASTER_TOKEN_FILE})
+
+        # Create consul configuration file
         if [ ! -f ${CONSUL_CONFIG_FILE} ]; then
             touch ${CONSUL_CONFIG_FILE}
+            chown ${USER}:${GROUP} ${CONSUL_CONFIG_FILE}
             chmod 600 ${CONSUL_CONFIG_FILE}
-            token=$(cat ${MASTER_TOKEN_FILE})
             cat > ${CONSUL_CONFIG_FILE} <<EOF
 {
     "acl_default_policy": "deny",
     "acl_master_token": "${token}",
-    "acl_datacenter": "$(hostname)"
+    "acl_datacenter": "$(hostname)",
+    "server": true,
+    "bootstrap": true,
+    "data_dir": "/usr/lib/consul",
+    "encrypt": "$(consul keygen)",
+    "enable_syslog": true,
+    "log_level": "INFO"
 }
 EOF
         fi
+
+        # Create the default config file for XiVO services using the master token
+        if [ ! -f ${DEFAULT_CONSUL_CONFIG} ]; then
+            touch ${DEFAULT_CONSUL_CONFIG}
+            chown ${USER}:${GROUP} ${DEFAULT_CONSUL_CONFIG}
+            chmod 640 ${DEFAULT_CONSUL_CONFIG}
+            cat > ${DEFAULT_CONSUL_CONFIG} <<EOF
+consul:
+    host: localhost
+    port: 8500
+    token: ${token}
+EOF
+        fi
+
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
 
