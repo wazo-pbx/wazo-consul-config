@@ -8,7 +8,6 @@ set -e
 MASTER_TOKEN_FILE="/usr/lib/consul/master_token"
 CONSUL_CONFIG_FILE="/etc/consul/config.json"
 DEFAULT_CONSUL_CONFIG="/usr/lib/consul/default_xivo_consul_config.yml"
-PIDFILE=/var/run/consul/consul.pid
 USER=consul
 GROUP=${USER}
 
@@ -28,7 +27,6 @@ case "$1" in
         # Change ownership to consul:consul
         chown -R ${USER}:${GROUP} /etc/consul
         chown -R ${USER}:${GROUP} /usr/lib/consul
-        chown -R ${USER}:${GROUP} /var/run/consul
 
         # Create the master token file
         if [ ! -f ${MASTER_TOKEN_FILE} ]; then
