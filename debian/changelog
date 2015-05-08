@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.0-4) xivo-dev; urgency=medium
+
+  * fix a syntax error in the postinst script
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Fri, 08 May 2015 12:22:24 -0400
+
 xivo-consul-packaging (0.5.0-3) xivo-dev; urgency=medium
 
   * move default config to /etc/consul/xivo

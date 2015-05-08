@@ -57,7 +57,6 @@ case "$1" in
     "log_level": "INFO"
 }
 EOF
-        fi
 
         # Create the default config file for XiVO services using the master token
         if [ ! -f ${DEFAULT_XIVO_CONFIG} ]; then
