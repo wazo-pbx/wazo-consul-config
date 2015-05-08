@@ -1,4 +1,10 @@
-xivo-consul-packaging (0.5.0-2) UNRELEASED; urgency=medium
+xivo-consul-packaging (0.5.0-3) xivo-dev; urgency=medium
+
+  * move default config to /etc/consul/xivo
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Fri, 08 May 2015 12:15:06 -0400
+
+xivo-consul-packaging (0.5.0-2) xivo-dev; urgency=medium
 
   * Create /var/run/consul in init instead of postinst
 

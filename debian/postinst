@@ -6,8 +6,8 @@
 set -e
 
 MASTER_TOKEN_FILE="/usr/lib/consul/master_token"
-CONSUL_CONFIG_FILE="/etc/consul/config.json"
-DEFAULT_CONSUL_CONFIG="/usr/lib/consul/default_xivo_consul_config.yml"
+DEFAULT_CONFIG="/etc/consul/xivo/config.json"
+DEFAULT_XIVO_CONFIG="/usr/lib/consul/default_xivo_consul_config.yml"
 USER=consul
 GROUP=${USER}
 
@@ -40,15 +40,15 @@ case "$1" in
         token=$(cat ${MASTER_TOKEN_FILE})
 
         # Create consul configuration file
-        if [ ! -f ${CONSUL_CONFIG_FILE} ]; then
-            touch ${CONSUL_CONFIG_FILE}
-            chown ${USER}:${GROUP} ${CONSUL_CONFIG_FILE}
-            chmod 600 ${CONSUL_CONFIG_FILE}
-            cat > ${CONSUL_CONFIG_FILE} <<EOF
+        touch ${DEFAULT_CONFIG}
+        chown ${USER}:${GROUP} ${DEFAULT_CONFIG}
+        chmod 600 ${DEFAULT_CONFIG}
+        cat > ${DEFAULT_CONFIG} <<EOF
 {
     "acl_default_policy": "deny",
     "acl_master_token": "${token}",
     "acl_datacenter": "$(hostname)",
+    "datacenter": "$(hostname)",
     "server": true,
     "bootstrap": true,
     "data_dir": "/usr/lib/consul",
@@ -60,11 +60,11 @@ EOF
         fi
 
         # Create the default config file for XiVO services using the master token
-        if [ ! -f ${DEFAULT_CONSUL_CONFIG} ]; then
-            touch ${DEFAULT_CONSUL_CONFIG}
-            chown ${USER}:${GROUP} ${DEFAULT_CONSUL_CONFIG}
-            chmod 640 ${DEFAULT_CONSUL_CONFIG}
-            cat > ${DEFAULT_CONSUL_CONFIG} <<EOF
+        if [ ! -f ${DEFAULT_XIVO_CONFIG} ]; then
+            touch ${DEFAULT_XIVO_CONFIG}
+            chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONFIG}
+            chmod 640 ${DEFAULT_XIVO_CONFIG}
+            cat > ${DEFAULT_XIVO_CONFIG} <<EOF
 consul:
     host: localhost
     port: 8500
