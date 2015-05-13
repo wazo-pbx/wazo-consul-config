@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.1-1~xivo1) xivo-dev; urgency=medium
+
+  * consul version 0.5.1
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Wed, 13 May 2015 14:55:51 -0400
+
 xivo-consul-packaging (0.5.0-5) xivo-dev; urgency=medium
 
   * add /etc/consul/xivo to debian/dirs
