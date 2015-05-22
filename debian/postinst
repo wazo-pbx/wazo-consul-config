@@ -50,6 +50,8 @@ case "$1" in
     "acl_datacenter": "$(hostname)",
     "datacenter": "$(hostname)",
     "server": true,
+    "bind_addr": "127.0.0.1",
+    "advertise_addr": "127.0.0.1",
     "bootstrap": true,
     "data_dir": "/usr/lib/consul",
     "encrypt": "$(consul keygen)",
