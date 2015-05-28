@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo1) xivo-dev; urgency=medium
+
+  * consul version 0.5.2
+
+ -- Sylvain Boily <sboily@avencall.com>  Wed, 27 May 2015 20:26:47 -0400
+
 xivo-consul-packaging (0.5.1-1~xivo2) xivo-dev; urgency=medium
 
   * add the bind_addr and advertise_addr fields to the configuration
