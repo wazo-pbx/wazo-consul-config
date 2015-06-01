@@ -17,7 +17,7 @@
 set -e
 
 VERSION=$(cat VERSION)
-FILENAME=${VERSION}_linux_386.zip
+FILENAME=${VERSION}_linux_${DEB_BUILD_ARCH}.zip
 URL="https://dl.bintray.com/mitchellh/consul/${FILENAME}"
 
 rm -rf tmp
@@ -25,7 +25,7 @@ mkdir tmp
 cd tmp
 
 wget -nv -O "${FILENAME}" "${URL}"
-if ! sha256sum --status -c ../SHA256SUM ; then
+if ! sha256sum --status -c ../SHA256SUM_${DEB_BUILD_ARCH} ; then
     echo "sha256sum did not match" >&2
     exit 1
 fi
