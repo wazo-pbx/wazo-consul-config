@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo2) xivo-dev; urgency=medium
+
+  * bump changelog version to test jenkins build
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Mon, 01 Jun 2015 14:31:19 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo1) xivo-dev; urgency=medium
 
   * consul version 0.5.2
