@@ -6,7 +6,7 @@ Build-Depends: unzip, wget
 Homepage: https://consul.io
 
 Package: consul
-Architecture: any
+Architecture: i386 amd64
 Depends: ${shlibs:Depends}
 Description: tool for discovering and configuring services
  Consul has multiple components, but as a whole, it is a tool for discovering and
