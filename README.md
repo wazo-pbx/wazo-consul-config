@@ -24,3 +24,12 @@ sudo apt-get install consul
 ```
 
 See the [documentation](http://documentation.xivo.io/en/latest/system/consul.html) to use consul   with your own configuration.
+
+## Repo 64 bits
+
+To xivo dev team : for the moment you need to upload the deb to the mirror and
+you need to add it manually with the command:
+
+```sh
+reprepro -vb /data/reprepro/xivo/ includedeb xivo-dev <your_consul_64bits_package>
+```
