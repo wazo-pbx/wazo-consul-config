@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright (C) 2015 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
@@ -22,16 +22,22 @@ then
     ARCH=386
 fi
 
+URL="https://dl.bintray.com/mitchellh/consul/"
 VERSION=$(cat VERSION)
 FILENAME=${VERSION}_linux_${ARCH}.zip
-URL="https://dl.bintray.com/mitchellh/consul/${FILENAME}"
+FILES=([1]=0.5.2_linux_386.zip [2]=0.5.2_linux_amd64.zip)
 
 rm -rf tmp
 mkdir tmp
 cd tmp
 
-wget -nv -O "${FILENAME}" "${URL}"
-if ! sha256sum --status -c ../SHA256SUM_${ARCH} ; then
+for index in 1 2
+do
+    echo "download ${FILES[index]} sur ${URL}${FILES[index]}"
+    wget -nv -O "${FILES[index]}" "${URL}${FILES[index]}"
+done
+
+if ! sha256sum --status -c ../SHA256SUM ; then
     echo "sha256sum did not match" >&2
     exit 1
 fi
