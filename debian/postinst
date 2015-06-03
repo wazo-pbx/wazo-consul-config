@@ -57,6 +57,7 @@ case "$1" in
     "data_dir": "/usr/lib/consul",
     "encrypt": "$(consul keygen)",
     "enable_syslog": true,
+    "disable_update_check": true,
     "log_level": "INFO"
 }
 EOF
