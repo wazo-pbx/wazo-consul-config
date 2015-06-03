@@ -17,7 +17,6 @@ PIDDIR=/var/run/$DAEMONNAME
 PIDFILE=/var/run/$DAEMONNAME/$DAEMONNAME.pid
 SCRIPTNAME=/etc/init.d/$DAEMONNAME
 CONFIG_DIR=/etc/consul/xivo
-LISTEN_ADDRESS=127.0.0.1
 USER=consul
 GROUP=$USER
 
@@ -30,7 +29,7 @@ GROUP=$USER
 # Load the VERBOSE setting and other rcS variables
 [ -f /etc/default/rcS ] && . /etc/default/rcS
 
-DAEMON_ARGS="agent -server -client ${LISTEN_ADDRESS} -config-dir ${CONFIG_DIR} -pid-file ${PIDFILE}"
+DAEMON_ARGS="agent -server -config-dir ${CONFIG_DIR} -pid-file ${PIDFILE}"
 
 # Define LSB log_* functions.
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
