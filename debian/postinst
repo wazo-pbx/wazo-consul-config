@@ -55,7 +55,6 @@ case "$1" in
     "client_addr": "127.0.0.1",
     "bootstrap": true,
     "data_dir": "/usr/lib/consul",
-    "encrypt": "$(consul keygen)",
     "enable_syslog": true,
     "disable_update_check": true,
     "log_level": "INFO"
