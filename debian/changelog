@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo3) xivo-dev; urgency=medium
+
+  * change default config file
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Thu, 04 Jun 2015 14:36:58 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo2) xivo-dev; urgency=medium
 
   * bump changelog version to test jenkins build
