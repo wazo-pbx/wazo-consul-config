@@ -3,8 +3,7 @@
 This repository contains the packaging information for [consul](www.consul.io).
 
 To get a new version of consul in the XiVO repository, set the desired version
-in the `VERSION` file, update the `SHA256SUM_386 and SHA256SUM_amd64` files and increment the version in
-the changelog file.
+in the `VERSION` file, increment the version in the changelog file.
 
 The check sum can be retrieved from the [consul download page](https://consul.io/downloads.html).
 
@@ -24,12 +23,3 @@ sudo apt-get install consul
 ```
 
 See the [documentation](http://documentation.xivo.io/en/latest/system/consul.html) to use consul   with your own configuration.
-
-## Repo 64 bits
-
-To xivo dev team : for the moment you need to upload the deb to the mirror and
-you need to add it manually with the command:
-
-```sh
-reprepro -vb /data/reprepro/xivo/ includedeb xivo-dev <your_consul_64bits_package>
-```

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Copyright (C) 2015 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,30 +16,12 @@
 
 set -e
 
-ARCH=${DEB_BUILD_ARCH}
-if [ "${DEB_BUILD_ARCH}" = "i386" ]
-then
-    ARCH=386
-fi
-
-URL="https://dl.bintray.com/mitchellh/consul/"
-VERSION=$(cat VERSION)
-FILENAME=${VERSION}_linux_${ARCH}.zip
-FILES=([1]=0.5.2_linux_386.zip [2]=0.5.2_linux_amd64.zip)
+VERSION=v$(cat VERSION)
+URL="https://github.com/hashicorp/consul.git"
 
 rm -rf tmp
 mkdir tmp
 cd tmp
 
-for index in 1 2
-do
-    echo "download ${FILES[index]} sur ${URL}${FILES[index]}"
-    wget -nv -O "${FILES[index]}" "${URL}${FILES[index]}"
-done
-
-if ! sha256sum --status -c ../SHA256SUM ; then
-    echo "sha256sum did not match" >&2
-    exit 1
-fi
-
-unzip "${FILENAME}"
+git clone ${URL} ${VERSION}
+mv ${VERSION} consul

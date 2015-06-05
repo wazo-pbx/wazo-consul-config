@@ -2,13 +2,13 @@ Source: xivo-consul-packaging
 Section: net
 Priority: optional
 Maintainer: XiVO Dev Team <dev@avencall.com>
-Build-Depends: unzip, wget
+Build-Depends: debhelper, git, golang-go, unzip, wget
 Homepage: https://consul.io
 
 Package: consul
-Architecture: i386 amd64
+Architecture: any
 Depends: ${shlibs:Depends}
-Description: tool for discovering and configuring services
+Description: Tool for discovering and configuring services
  Consul has multiple components, but as a whole, it is a tool for discovering and
  configuring services in your infrastructure. It provides several key features,
  service discovery, health checking, key/value store and multi datacenter.

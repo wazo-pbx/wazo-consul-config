@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo4) xivo-dev; urgency=medium
+
+  * Use sources from github
+
+ -- Sylvain Boily <sboily@avencall.com>  Fri, 05 Jun 2015 19:44:28 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo3) xivo-dev; urgency=medium
 
   * change default config file
