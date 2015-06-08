@@ -1,4 +1,4 @@
-Source: xivo-consul-packaging
+Source: consul
 Section: net
 Priority: optional
 Maintainer: XiVO Dev Team <dev@avencall.com>
