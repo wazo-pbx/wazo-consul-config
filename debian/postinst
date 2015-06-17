@@ -5,14 +5,20 @@
 
 set -e
 
-MASTER_TOKEN_FILE="/usr/lib/consul/master_token"
+DATA_DIR="/var/lib/consul"
+MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
+DEFAULT_XIVO_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
 DEFAULT_CONFIG="/etc/consul/xivo/config.json"
-DEFAULT_XIVO_CONFIG="/usr/lib/consul/default_xivo_consul_config.yml"
 USER=consul
 GROUP=${USER}
 
 case "$1" in
     configure)
+        # In version < 15.12 consul datas were in /usr/lib/consul
+        if [ -d "/usr/lib/consul" ]; then
+            mv "/usr/lib/consul" ${DATA_DIR}
+        fi
+
         # add user consul
         if ! getent passwd ${USER} > /dev/null ; then
                 echo "Adding system user for ${USER}" 1>&2
@@ -26,7 +32,7 @@ case "$1" in
 
         # Change ownership to consul:consul
         chown -R ${USER}:${GROUP} /etc/consul
-        chown -R ${USER}:${GROUP} /usr/lib/consul
+        chown -R ${USER}:${GROUP} ${DATA_DIR}
 
         # Create the master token file
         if [ ! -f ${MASTER_TOKEN_FILE} ]; then
@@ -54,7 +60,7 @@ case "$1" in
     "advertise_addr": "127.0.0.1",
     "client_addr": "127.0.0.1",
     "bootstrap": true,
-    "data_dir": "/usr/lib/consul",
+    "data_dir": "${DATA_DIR}",
     "enable_syslog": true,
     "disable_update_check": true,
     "log_level": "INFO"
