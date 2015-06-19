@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo9) xivo-dev; urgency=medium
+
+  * move consul data to /var/lib/consul
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Wed, 17 Jun 2015 15:08:02 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo8) xivo-dev; urgency=medium
 
   * wait for syslog before starting consul

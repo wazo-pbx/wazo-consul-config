@@ -1,2 +1,2 @@
 etc/consul/xivo
-usr/lib/consul
+var/lib/consul
