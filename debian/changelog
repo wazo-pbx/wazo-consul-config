@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo11) UNRELEASED; urgency=low
+
+  * fix move consul data to /var/lib/consul
+
+ -- Sebastien Duthil <sduthil@avencall.com>  Mon, 22 Jun 2015 10:08:41 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo10) UNRELEASED; urgency=low
 
   * fix move consul data to /var/lib/consul

@@ -16,7 +16,7 @@ case "$1" in
     configure)
         # In version < 15.12 consul datas were in /usr/lib/consul
         if [ -d "/usr/lib/consul" ]; then
-            mv "/usr/lib/consul/*" "${DATA_DIR}"
+            mv /usr/lib/consul/* "${DATA_DIR}"
             rmdir "/usr/lib/consul"
         fi
 
