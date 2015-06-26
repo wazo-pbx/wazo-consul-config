@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo14) xivo-dev; urgency=medium
+
+  * Added status info to init
+
+ -- Sylvain Boily <sboily@avencall.com>  Fri, 26 Jun 2015 11:18:22 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo13) xivo-dev; urgency=medium
 
   * Added /etc/default/consul by default
