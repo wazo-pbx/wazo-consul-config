@@ -9,6 +9,7 @@ DATA_DIR="/var/lib/consul"
 MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
 DEFAULT_XIVO_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
 DEFAULT_CONFIG="/etc/consul/xivo/config.json"
+INIT_DEFAULT_CONFIG="/etc/default/consul"
 USER=consul
 GROUP=${USER}
 
@@ -49,6 +50,7 @@ case "$1" in
         # Create consul configuration file
         touch ${DEFAULT_CONFIG}
         chown ${USER}:${GROUP} ${DEFAULT_CONFIG}
+        echo "RUNCONSUL=yes" > ${INIT_DEFAULT_CONFIG}
         chmod 600 ${DEFAULT_CONFIG}
         cat > ${DEFAULT_CONFIG} <<EOF
 {
