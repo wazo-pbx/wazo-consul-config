@@ -17,6 +17,7 @@ PIDDIR=/var/run/$DAEMONNAME
 PIDFILE=/var/run/$DAEMONNAME/$DAEMONNAME.pid
 SCRIPTNAME=/etc/init.d/$DAEMONNAME
 CONFIG_DIR=/etc/consul/xivo
+RUNCONSUL="yes"
 USER=consul
 GROUP=$USER
 
@@ -31,6 +32,13 @@ GROUP=$USER
 
 DAEMON_ARGS="agent -server -config-dir ${CONFIG_DIR} -pid-file ${PIDFILE}"
 
+is_enabled() {
+    if [ "$RUNCONSUL" != "yes" ];then
+        echo "Consul startup is disabled. Edit /etc/default/consul first."
+        exit 0
+    fi
+}
+
 # Define LSB log_* functions.
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
 . /lib/lsb/init-functions
@@ -42,6 +50,7 @@ DAEMON_ARGS="agent -server -config-dir ${CONFIG_DIR} -pid-file ${PIDFILE}"
 #
 do_start()
 {
+    is_enabled
     # Return
     #   0 if daemon has been started
     #   1 if daemon was already running
