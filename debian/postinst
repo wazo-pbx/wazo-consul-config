@@ -48,9 +48,12 @@ case "$1" in
         token=$(cat ${MASTER_TOKEN_FILE})
 
         # Create consul configuration file
+        if [ ! -f ${INIT_DEFAULT_CONFIG} ]; then
+            echo "RUNCONSUL=yes" > ${INIT_DEFAULT_CONFIG}
+        fi
+
         touch ${DEFAULT_CONFIG}
         chown ${USER}:${GROUP} ${DEFAULT_CONFIG}
-        echo "RUNCONSUL=yes" > ${INIT_DEFAULT_CONFIG}
         chmod 600 ${DEFAULT_CONFIG}
         cat > ${DEFAULT_CONFIG} <<EOF
 {
