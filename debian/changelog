@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo15) xivo-dev; urgency=low
+
+  * Don't overwrite /etc/default/consul in postinst
+
+ -- Etienne Lessard <elessard@avencall.com>  Mon, 29 Jun 2015 13:24:33 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo14) xivo-dev; urgency=medium
 
   * Added status info to init
