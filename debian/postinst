@@ -66,6 +66,7 @@ case "$1" in
     "advertise_addr": "127.0.0.1",
     "client_addr": "127.0.0.1",
     "bootstrap_expect": 1,
+    "rejoin_after_leave": true,
     "data_dir": "${DATA_DIR}",
     "enable_syslog": true,
     "disable_update_check": true,
