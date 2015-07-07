@@ -30,7 +30,7 @@ GROUP=$USER
 # Load the VERBOSE setting and other rcS variables
 [ -f /etc/default/rcS ] && . /etc/default/rcS
 
-DAEMON_ARGS="agent -server -config-dir ${CONFIG_DIR} -pid-file ${PIDFILE}"
+DAEMON_ARGS="agent -config-dir ${CONFIG_DIR} -pid-file ${PIDFILE}"
 
 is_enabled() {
     if [ "$RUNCONSUL" != "yes" ];then

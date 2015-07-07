@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo18) xivo-dev; urgency=medium
+
+  * Don't force server option
+
+ -- Sylvain Boily <sboily@avencall.com>  Tue, 07 Jul 2015 17:46:00 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo17) xivo-dev; urgency=medium
 
   * Add rejoin_after_leave on default config
