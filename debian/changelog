@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo19) xivo-dev; urgency=medium
+
+* add a default acl_token to the configuration
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Wed, 14 Oct 2015 09:02:36 -0400
+
 xivo-consul-packaging (0.5.2-1~xivo18) xivo-dev; urgency=medium
 
   * Don't force server option
