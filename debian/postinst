@@ -32,6 +32,9 @@ case "$1" in
                         ${USER}
         fi
 
+        # Be able to read key/certificate for HTTPS
+        usermod -G www-data consul
+
         # Change ownership to consul:consul
         chown -R ${USER}:${GROUP} /etc/consul
         chown -R ${USER}:${GROUP} ${DATA_DIR}
@@ -71,22 +74,29 @@ case "$1" in
     "data_dir": "${DATA_DIR}",
     "enable_syslog": true,
     "disable_update_check": true,
-    "log_level": "INFO"
+    "log_level": "INFO",
+    "ports": {
+        "dns": -1,
+        "http": -1,
+        "https": 8500
+    },
+    "cert_file" : "/usr/share/xivo-certs/server.crt",
+    "key_file" : "/usr/share/xivo-certs/server.key"
 }
 EOF
 
         # Create the default config file for XiVO services using the master token
-        if [ ! -f ${DEFAULT_XIVO_CONFIG} ]; then
-            touch ${DEFAULT_XIVO_CONFIG}
-            chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONFIG}
-            chmod 640 ${DEFAULT_XIVO_CONFIG}
-            cat > ${DEFAULT_XIVO_CONFIG} <<EOF
+        touch ${DEFAULT_XIVO_CONFIG}
+        chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONFIG}
+        chmod 640 ${DEFAULT_XIVO_CONFIG}
+        cat > ${DEFAULT_XIVO_CONFIG} <<EOF
 consul:
+    scheme: https
     host: localhost
     port: 8500
+    verify: /usr/share/xivo-certs/server.crt
     token: ${token}
 EOF
-        fi
 
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
