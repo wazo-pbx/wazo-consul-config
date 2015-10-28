@@ -15,13 +15,13 @@ GROUP=${USER}
 
 case "$1" in
     configure)
-        # In version < 15.12 consul datas were in /usr/lib/consul
+        # In version < 15.12 consul data were in /usr/lib/consul
         if [ -d "/usr/lib/consul" ]; then
             mv /usr/lib/consul/* "${DATA_DIR}"
             rmdir "/usr/lib/consul"
         fi
 
-        # add user consul
+        # Add user consul
         if ! getent passwd ${USER} > /dev/null ; then
                 echo "Adding system user for ${USER}" 1>&2
                 adduser --system --group --quiet \
