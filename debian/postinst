@@ -66,7 +66,7 @@ case "$1" in
     "acl_datacenter": "$(hostname)",
     "datacenter": "$(hostname)",
     "server": true,
-    "bind_addr": "0.0.0.0",
+    "bind_addr": "127.0.0.1",
     "advertise_addr": "127.0.0.1",
     "client_addr": "0.0.0.0",
     "bootstrap_expect": 1,
@@ -75,6 +75,9 @@ case "$1" in
     "enable_syslog": true,
     "disable_update_check": true,
     "log_level": "INFO",
+    "addresses": {
+        "rpc": "127.0.0.1"
+    },
     "ports": {
         "dns": -1,
         "http": -1,
