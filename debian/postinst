@@ -80,8 +80,8 @@ case "$1" in
         "http": -1,
         "https": 8500
     },
-    "cert_file" : "/usr/share/xivo-certs/server.crt",
-    "key_file" : "/usr/share/xivo-certs/server.key"
+    "cert_file": "/usr/share/xivo-certs/server.crt",
+    "key_file": "/usr/share/xivo-certs/server.key"
 }
 EOF
 
