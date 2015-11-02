@@ -62,7 +62,6 @@ case "$1" in
 {
     "acl_default_policy": "deny",
     "acl_master_token": "${token}",
-    "acl_token": "${token}",
     "acl_datacenter": "$(hostname)",
     "datacenter": "$(hostname)",
     "server": true,
