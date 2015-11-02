@@ -68,16 +68,13 @@ case "$1" in
     "server": true,
     "bind_addr": "127.0.0.1",
     "advertise_addr": "127.0.0.1",
-    "client_addr": "0.0.0.0",
+    "client_addr": "127.0.0.1",
     "bootstrap_expect": 1,
     "rejoin_after_leave": true,
     "data_dir": "${DATA_DIR}",
     "enable_syslog": true,
     "disable_update_check": true,
     "log_level": "INFO",
-    "addresses": {
-        "rpc": "127.0.0.1"
-    },
     "ports": {
         "dns": -1,
         "http": -1,
