@@ -15,13 +15,13 @@ GROUP=${USER}
 
 case "$1" in
     configure)
-        # In version < 15.12 consul datas were in /usr/lib/consul
+        # In version < 15.12 consul data were in /usr/lib/consul
         if [ -d "/usr/lib/consul" ]; then
             mv /usr/lib/consul/* "${DATA_DIR}"
             rmdir "/usr/lib/consul"
         fi
 
-        # add user consul
+        # Add user consul
         if ! getent passwd ${USER} > /dev/null ; then
                 echo "Adding system user for ${USER}" 1>&2
                 adduser --system --group --quiet \
@@ -31,6 +31,9 @@ case "$1" in
                         --gecos "Consul discovery service" \
                         ${USER}
         fi
+
+        # Be able to read key/certificate for HTTPS
+        usermod -G www-data consul
 
         # Change ownership to consul:consul
         chown -R ${USER}:${GROUP} /etc/consul
@@ -59,7 +62,6 @@ case "$1" in
 {
     "acl_default_policy": "deny",
     "acl_master_token": "${token}",
-    "acl_token": "${token}",
     "acl_datacenter": "$(hostname)",
     "datacenter": "$(hostname)",
     "server": true,
@@ -71,22 +73,29 @@ case "$1" in
     "data_dir": "${DATA_DIR}",
     "enable_syslog": true,
     "disable_update_check": true,
-    "log_level": "INFO"
+    "log_level": "INFO",
+    "ports": {
+        "dns": -1,
+        "http": -1,
+        "https": 8500
+    },
+    "cert_file": "/usr/share/xivo-certs/server.crt",
+    "key_file": "/usr/share/xivo-certs/server.key"
 }
 EOF
 
         # Create the default config file for XiVO services using the master token
-        if [ ! -f ${DEFAULT_XIVO_CONFIG} ]; then
-            touch ${DEFAULT_XIVO_CONFIG}
-            chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONFIG}
-            chmod 640 ${DEFAULT_XIVO_CONFIG}
-            cat > ${DEFAULT_XIVO_CONFIG} <<EOF
+        touch ${DEFAULT_XIVO_CONFIG}
+        chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONFIG}
+        chmod 640 ${DEFAULT_XIVO_CONFIG}
+        cat > ${DEFAULT_XIVO_CONFIG} <<EOF
 consul:
+    scheme: https
     host: localhost
     port: 8500
+    verify: /usr/share/xivo-certs/server.crt
     token: ${token}
 EOF
-        fi
 
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
