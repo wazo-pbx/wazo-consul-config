@@ -7,7 +7,8 @@ set -e
 
 DATA_DIR="/var/lib/consul"
 MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
-DEFAULT_XIVO_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
+DEFAULT_XIVO_CONSUL_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
+DEFAULT_XIVO_CONSUL_TOKEN="${DATA_DIR}/default_xivo_consul_token.yml"
 DEFAULT_CONFIG="/etc/consul/xivo/config.json"
 INIT_DEFAULT_CONFIG="/etc/default/consul"
 USER=consul
@@ -84,19 +85,25 @@ case "$1" in
 }
 EOF
 
-        # Create the default config file for XiVO services using the master token
-        touch ${DEFAULT_XIVO_CONFIG}
-        chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONFIG}
-        chmod 640 ${DEFAULT_XIVO_CONFIG}
-        cat > ${DEFAULT_XIVO_CONFIG} <<EOF
+        # Create the default config file for XiVO services
+        touch ${DEFAULT_XIVO_CONSUL_CONFIG}
+        chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONSUL_CONFIG}
+        chmod 640 ${DEFAULT_XIVO_CONSUL_CONFIG}
+        cat > ${DEFAULT_XIVO_CONSUL_CONFIG} <<EOF
 consul:
     scheme: https
     host: localhost
     port: 8500
     verify: /usr/share/xivo-certs/server.crt
+EOF
+        # Create the master token config file for XiVO services
+        touch ${DEFAULT_XIVO_CONSUL_TOKEN}
+        chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONSUL_TOKEN}
+        chmod 640 ${DEFAULT_XIVO_CONSUL_TOKEN}
+        cat > ${DEFAULT_XIVO_CONSUL_TOKEN} <<EOF
+consul:
     token: ${token}
 EOF
-
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
 
