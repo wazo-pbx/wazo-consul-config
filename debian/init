@@ -55,7 +55,7 @@ wait_for_leader ()
         fi
         sleep 1
     done
-    exit 1
+    return 1
 }
 
 #
@@ -78,7 +78,7 @@ do_start()
         if start-stop-daemon --quiet --stop --test --pidfile $PIDFILE --exec $DAEMON --user $USER; then
             wait_for_leader "30"
             if [ $? -eq 0 ]; then
-                exit 0
+                return 0
             fi
             echo " FAIL: no leader elected."
             return 2
