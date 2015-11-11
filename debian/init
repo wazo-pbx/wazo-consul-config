@@ -45,6 +45,19 @@ is_enabled() {
 
 [ -d "$PIDDIR" ] || install -d -o "$USER" -g "$GROUP" "$PIDDIR"
 
+wait_for_leader ()
+{
+    timeout=$1
+    for i in $(seq 1 $timeout); do
+        leader=$(curl -k -s https://localhost:8500/v1/status/leader)
+        if [ $leader != "" ]; then
+            return 0
+        fi
+        sleep 1
+    done
+    exit 1
+}
+
 #
 # Function that starts the daemon/service
 #
@@ -63,14 +76,11 @@ do_start()
     started=0
     for i in `seq 1 30`; do
         if start-stop-daemon --quiet --stop --test --pidfile $PIDFILE --exec $DAEMON --user $USER; then
-            for i in `seq 1 30`; do
-                if "$DAEMON" info >/dev/null; then
-                    echo 'done'
-                    return 0
-                fi
-                sleep 1
-            done
-            echo " FAIL: consul process is alive, but is not listening."
+            wait_for_leader "30"
+            if [ $? -eq 0 ]; then
+                exit 0
+            fi
+            echo " FAIL: no leader elected."
             return 2
         fi
         sleep 1
