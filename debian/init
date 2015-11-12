@@ -47,6 +47,9 @@ is_enabled() {
 
 wait_for_leader ()
 {
+    if [ "${WAIT_FOR_LEADER}" != "yes" ] ; then
+        return 0
+    fi
     timeout=$1
     http_port=$(grep '\"http\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
     https_port=$(grep '\"https\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')

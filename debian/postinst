@@ -53,7 +53,10 @@ case "$1" in
 
         # Create consul configuration file
         if [ ! -f ${INIT_DEFAULT_CONFIG} ]; then
-            echo "RUNCONSUL=yes" > ${INIT_DEFAULT_CONFIG}
+            cat > ${INIT_DEFAULT_CONFIG} <<EOF
+RUNCONSUL=yes
+WAIT_FOR_LEADER=yes
+EOF
         fi
 
         touch ${DEFAULT_CONFIG}
