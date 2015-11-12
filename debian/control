@@ -7,7 +7,7 @@ Homepage: https://consul.io
 
 Package: consul
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, awk, curl
 Description: Tool for discovering and configuring services
  Consul has multiple components, but as a whole, it is a tool for discovering and
  configuring services in your infrastructure. It provides several key features,

@@ -45,6 +45,53 @@ is_enabled() {
 
 [ -d "$PIDDIR" ] || install -d -o "$USER" -g "$GROUP" "$PIDDIR"
 
+# Leadership may be temporarily wrong: our consul may elect itself then decide a
+# few seconds later that there is no leader.
+has_leader() {
+    for i in $(seq 1 5); do  # Leadership must be not null for some time
+        leader=$(curl -k -s ${url})
+        if [ $? -ne 0 ] ; then  # curl failed to contact consul
+            return 1
+        fi
+        if [ "${leader}" = '""' ]; then
+            return 2
+        fi
+        sleep 1
+    done
+    return 0
+}
+
+wait_for_leader()
+{
+    if [ "${WAIT_FOR_LEADER}" = "no" ] ; then
+        return 0
+    fi
+    timeout=$1
+    http_port=$(grep '\"http\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
+    https_port=$(grep '\"https\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
+    if [ "$http_port" != "-1" ] ; then  # HTTP is not explicitly disabled
+        if [ -z "$http_port" ] ; then
+            http_port=8500
+        fi
+        url="http://localhost:${http_port}/v1/status/leader"
+    else
+        if [ "${https_port}" != "" ] && [ "${https_port}" != "-1" ] ; then
+            url="https://localhost:${https_port}/v1/status/leader"
+        else
+            echo "Cannot find consul's HTTP(s) port"
+            return 1
+        fi
+    fi
+
+    for i in $(seq 1 $timeout); do
+        if has_leader ; then
+            return 0
+        fi
+        sleep 1
+    done
+    return 1
+}
+
 #
 # Function that starts the daemon/service
 #
@@ -55,22 +102,24 @@ do_start()
     #   0 if daemon has been started
     #   1 if daemon was already running
     #   2 if daemon could not be started
+    #   3 if daemon configuration is not valid
     echo "Starting consul and backgrounding"
     start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --chuid $USER --background --test -- $DAEMON_ARGS || return 1
     start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --chuid $USER --background -- $DAEMON_ARGS || return 2
 
-    echo -n "Waiting for consul daemon to be listening..."
+    if ! "$DAEMON" configtest -config-dir "$CONFIG_DIR"; then
+        echo "FAIL: invalid configuration file"
+        return 3
+    fi
+    echo "Waiting for consul daemon to start and elect a leader..."
     started=0
     for i in `seq 1 30`; do
         if start-stop-daemon --quiet --stop --test --pidfile $PIDFILE --exec $DAEMON --user $USER; then
-            for i in `seq 1 30`; do
-                if "$DAEMON" info >/dev/null; then
-                    echo 'done'
-                    return 0
-                fi
-                sleep 1
-            done
-            echo " FAIL: consul process is alive, but is not listening."
+            if wait_for_leader 30; then
+                echo 'done'
+                return 0
+            fi
+            echo " FAIL: no leader elected."
             return 2
         fi
         sleep 1
