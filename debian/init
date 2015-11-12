@@ -88,11 +88,12 @@ do_start()
     start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --chuid $USER --background --test -- $DAEMON_ARGS || return 1
     start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --chuid $USER --background -- $DAEMON_ARGS || return 2
 
-    echo -n "Waiting for consul daemon to be listening..."
+    echo -n "Waiting for consul daemon to start and elect a leader..."
     started=0
     for i in `seq 1 30`; do
         if start-stop-daemon --quiet --stop --test --pidfile $PIDFILE --exec $DAEMON --user $USER; then
             if wait_for_leader 30; then
+                echo 'done'
                 return 0
             fi
             echo " FAIL: no leader elected."
