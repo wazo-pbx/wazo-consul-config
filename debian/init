@@ -45,7 +45,23 @@ is_enabled() {
 
 [ -d "$PIDDIR" ] || install -d -o "$USER" -g "$GROUP" "$PIDDIR"
 
-wait_for_leader ()
+# Leadership may be temporarily wrong: our consul may elect itself then decide a
+# few seconds later that there is no leader.
+has_leader() {
+    for i in $(seq 1 5); do  # Leadership must be not null for some time
+        leader=$(curl -k -s ${url})
+        if [ $? -ne 0 ] ; then  # curl failed to contact consul
+            return 1
+        fi
+        if [ "${leader}" = '""' ]; then
+            return 2
+        fi
+        sleep 1
+    done
+    return 0
+}
+
+wait_for_leader()
 {
     if [ "${WAIT_FOR_LEADER}" != "yes" ] ; then
         return 0
@@ -68,8 +84,7 @@ wait_for_leader ()
     fi
 
     for i in $(seq 1 $timeout); do
-        leader=$(curl -k -s ${url})
-        if [ "${leader}" != "" ]; then
+        if has_leader ; then
             return 0
         fi
         sleep 1

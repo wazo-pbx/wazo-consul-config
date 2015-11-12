@@ -109,7 +109,6 @@ consul:
 EOF
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
-
     ;;
 
     *)
