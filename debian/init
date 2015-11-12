@@ -89,8 +89,7 @@ do_start()
     started=0
     for i in `seq 1 30`; do
         if start-stop-daemon --quiet --stop --test --pidfile $PIDFILE --exec $DAEMON --user $USER; then
-            wait_for_leader "30"
-            if [ $? -eq 0 ]; then
+            if wait_for_leader 30; then
                 return 0
             fi
             echo " FAIL: no leader elected."
