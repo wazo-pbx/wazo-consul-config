@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo23) xivo-dev; urgency=medium
+
+  * wait for a leader election in the init script
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Thu, 12 Nov 2015 10:19:09 -0500
+
 xivo-consul-packaging (0.5.2-1~xivo22) xivo-dev; urgency=low
 
   * split master token from xivo_default_consul_config
