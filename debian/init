@@ -63,7 +63,7 @@ has_leader() {
 
 wait_for_leader()
 {
-    if [ "${WAIT_FOR_LEADER}" != "yes" ] ; then
+    if [ "${WAIT_FOR_LEADER}" = "no" ] ; then
         return 0
     fi
     timeout=$1
