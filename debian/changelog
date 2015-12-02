@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.5.2-1~xivo24) xivo-dev; urgency=low
+
+  * use hostname -s to generate datacenter name
+
+ -- Etienne Lessard <elessard@avencall.com>  Wed, 02 Dec 2015 09:44:07 -0500
+
 xivo-consul-packaging (0.5.2-1~xivo23) xivo-dev; urgency=medium
 
   * wait for a leader election in the init script

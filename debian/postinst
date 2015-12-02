@@ -66,8 +66,8 @@ EOF
 {
     "acl_default_policy": "deny",
     "acl_master_token": "${token}",
-    "acl_datacenter": "$(hostname)",
-    "datacenter": "$(hostname)",
+    "acl_datacenter": "$(hostname -s)",
+    "datacenter": "$(hostname -s)",
     "server": true,
     "bind_addr": "127.0.0.1",
     "advertise_addr": "127.0.0.1",
