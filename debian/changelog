@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.6.0-1~xivo1) xivo-dev; urgency=medium
+
+  * New upstream release.
+
+ -- Sylvain Boily <sboily@avencall.com>  Wed, 16 Dec 2015 15:32:28 -0500
+
 xivo-consul-packaging (0.5.2-1~xivo24) xivo-dev; urgency=low
 
   * use hostname -s to generate datacenter name
