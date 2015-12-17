@@ -23,8 +23,8 @@ then
 fi
 
 VERSION=$(cat VERSION)
-FILENAME=${VERSION}_linux_${ARCH}.zip
-URL="https://dl.bintray.com/mitchellh/consul/${FILENAME}"
+FILENAME=consul_${VERSION}_linux_${ARCH}.zip
+URL="https://releases.hashicorp.com/consul/${VERSION}/${FILENAME}"
  
 rm -rf tmp
 mkdir tmp
