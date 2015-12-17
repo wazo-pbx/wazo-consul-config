@@ -13,9 +13,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
- 
+
 set -e
- 
+
 ARCH=${DEB_BUILD_ARCH}
 if [ "${DEB_BUILD_ARCH}" = "i386" ]
 then
@@ -25,11 +25,11 @@ fi
 VERSION=$(cat VERSION)
 FILENAME=consul_${VERSION}_linux_${ARCH}.zip
 URL="https://releases.hashicorp.com/consul/${VERSION}/${FILENAME}"
- 
+
 rm -rf tmp
 mkdir tmp
 cd tmp
- 
+
 wget -nv -O "${FILENAME}" "${URL}"
 if ! sha256sum --status -c ../SHA256SUM_${ARCH} ; then
     echo "sha256sum did not match" >&2
