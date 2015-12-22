@@ -2,7 +2,7 @@ Source: xivo-consul-packaging
 Section: net
 Priority: optional
 Maintainer: XiVO Dev Team <dev@avencall.com>
-Build-Depends: debhelper (>= 9), git, unzip, wget
+Build-Depends: debhelper (>= 9), dh-systemd (>= 1.5), git, unzip, wget
 Homepage: https://consul.io
 
 Package: consul

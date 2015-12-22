@@ -1,0 +1,1 @@
+rm_conffile /etc/init.d/consul 0.6.0~xivo1
