@@ -1,0 +1,52 @@
+#!/bin/sh
+
+: ${CONFIG_DIR:=/etc/consul/xivo}
+: ${WAIT_FOR_LEADER:=yes}
+
+has_leader() {
+    for i in $(seq 1 5); do  # Leadership must be not null for some time
+        leader=$(curl -k -s ${url})
+        if [ $? -ne 0 ] ; then  # curl failed to contact consul
+            return 1
+        fi
+        if [ "${leader}" = '""' ]; then
+            return 2
+        fi
+        sleep 1
+    done
+    return 0
+}
+
+wait_for_leader()
+{
+    if [ "${WAIT_FOR_LEADER}" = "no" ] ; then
+        return 0
+    fi
+    timeout=$1
+    http_port=$(grep '\"http\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
+    https_port=$(grep '\"https\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
+    if [ "$http_port" != "-1" ] ; then  # HTTP is not explicitly disabled
+        if [ -z "$http_port" ] ; then
+            http_port=8500
+        fi
+        url="http://localhost:${http_port}/v1/status/leader"
+    else
+        if [ "${https_port}" != "" ] && [ "${https_port}" != "-1" ] ; then
+            url="https://localhost:${https_port}/v1/status/leader"
+        else
+            echo "Cannot find consul's HTTP(s) port"
+            return 1
+        fi
+    fi
+
+    for i in $(seq 1 $timeout); do
+        if has_leader ; then
+            return 0
+        fi
+        sleep 1
+    done
+    return 1
+}
+
+wait_for_leader 30
+exit $?

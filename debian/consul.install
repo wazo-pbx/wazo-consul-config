@@ -1,0 +1,2 @@
+tmp/consul usr/bin
+debian/consul-wait-leader usr/bin

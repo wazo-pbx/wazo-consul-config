@@ -8,6 +8,6 @@ override_dh_auto_build:
 	./fetch_binary.sh
 
 %:
-	dh $@
+	dh $@ --with systemd
 
 .PHONY: build

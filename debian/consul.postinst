@@ -10,7 +10,6 @@ MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
 DEFAULT_XIVO_CONSUL_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
 DEFAULT_XIVO_CONSUL_TOKEN="${DATA_DIR}/default_xivo_consul_token.yml"
 DEFAULT_CONFIG="/etc/consul/xivo/config.json"
-INIT_DEFAULT_CONFIG="/etc/default/consul"
 USER=consul
 GROUP=${USER}
 
@@ -50,14 +49,6 @@ case "$1" in
         fi
 
         token=$(cat ${MASTER_TOKEN_FILE})
-
-        # Create consul configuration file
-        if [ ! -f ${INIT_DEFAULT_CONFIG} ]; then
-            cat > ${INIT_DEFAULT_CONFIG} <<EOF
-RUNCONSUL=yes
-WAIT_FOR_LEADER=yes
-EOF
-        fi
 
         touch ${DEFAULT_CONFIG}
         chown ${USER}:${GROUP} ${DEFAULT_CONFIG}
@@ -107,6 +98,20 @@ EOF
 consul:
     token: ${token}
 EOF
+
+        # systemd migration
+        if [ -f /etc/default/consul ]; then
+            if grep -q -e 'WAIT_FOR_LEADER=no' -e 'CONFIG_DIR' /etc/default/consul; then
+                mkdir -p /etc/systemd/system/consul.service.d
+                cat >/etc/systemd/system/consul.service.d/custom.conf <<EOF
+[Service]
+$(sed -nr 's/^(CONFIG_DIR=|WAIT_FOR_LEADER=).+$/Environment=&/p' /etc/default/consul)
+EOF
+                systemctl daemon-reload || true
+            fi
+
+            rm /etc/default/consul
+        fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
     ;;
