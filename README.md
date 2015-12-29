@@ -14,7 +14,7 @@ The check sum can be retrieved from the [consul download page](https://consul.io
 
 This package is automatically installed on a XiVO version 15.09 or higher.
 
-To install on a debian based distribution:
+To install on Debian 8 (jessie):
 
 ```sh
 sudo sh -c "echo 'deb http://mirror.xivo.io/debian/ xivo-dev main' > /etc/apt/sources.list.d/xivo.list"
@@ -23,4 +23,4 @@ sudo apt-get update
 sudo apt-get install consul
 ```
 
-See the [documentation](http://documentation.xivo.io/en/latest/system/consul.html) to use consul   with your own configuration.
+See the [documentation](http://documentation.xivo.io/en/latest/system/consul.html) to use consul with your own configuration.
