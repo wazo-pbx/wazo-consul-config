@@ -1,6 +1,7 @@
 [Unit]
 Description=Consul agent
 After=network.target
+Before=monit.service
 
 [Service]
 Type=simple
