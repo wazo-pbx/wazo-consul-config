@@ -13,6 +13,7 @@ ExecStartPre=/usr/bin/install -d -o consul -g consul /var/run/consul
 ExecStart=/usr/bin/consul agent -config-dir ${CONFIG_DIR} -pid-file /var/run/consul/consul.pid
 ExecStartPost=/usr/bin/consul-wait-leader
 ExecStop=/usr/bin/consul leave
+KillMode=none
 PIDFile=/var/run/consul/consul.pid
 
 [Install]
