@@ -115,7 +115,7 @@ EOF
                         echo "Environment=CONFIG_DIR=${CONFIG_DIR}" >> "${drop_in}"
                     fi
 
-                    systemctl daemon-reload
+                    systemctl daemon-reload || true
                 fi
             )
         fi
