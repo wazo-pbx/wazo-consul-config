@@ -1,4 +1,4 @@
-xivo-consul-packaging (0.6.0~xivo5) xivo-dev; urgency=low
+xivo-consul-packaging (0.6.0~xivo6) xivo-dev; urgency=low
 
   * Switch from sysv to systemd.
 
