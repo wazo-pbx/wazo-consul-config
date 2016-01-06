@@ -100,26 +100,24 @@ consul:
 EOF
 
         # systemd migration
-        if [ -f /etc/default/consul ]; then
+        drop_in='/etc/systemd/system/consul.service.d/custom.conf'
+        if [ -f /etc/default/consul -a ! -f "${drop_in}" ]; then
             # be on the safe side and source /etc/default/consul in a subshell
             (
                 . /etc/default/consul
                 if [ "${WAIT_FOR_LEADER}" = no -o -n "${CONFIG_DIR}" ]; then
-                    mkdir -p /etc/systemd/system/consul.service.d
-                    filename='/etc/systemd/system/consul.service.d/custom.conf'
-                    echo '[Service]' > "${filename}"
+                    mkdir -p $(dirname "${drop_in}")
+                    echo '[Service]' > "${drop_in}"
                     if [ "${WAIT_FOR_LEADER}" = no ]; then
-                        echo "Environment=WAIT_FOR_LEADER=no" >> "${filename}"
+                        echo "Environment=WAIT_FOR_LEADER=no" >> "${drop_in}"
                     fi
                     if [ -n "${CONFIG_DIR}" ]; then
-                        echo "Environment=CONFIG_DIR=${CONFIG_DIR}" >> "${filename}"
+                        echo "Environment=CONFIG_DIR=${CONFIG_DIR}" >> "${drop_in}"
                     fi
 
                     systemctl daemon-reload
                 fi
             )
-
-            rm /etc/default/consul
         fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
