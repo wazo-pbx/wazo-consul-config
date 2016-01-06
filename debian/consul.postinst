@@ -100,7 +100,7 @@ consul:
 EOF
 
         # systemd migration
-        drop_in='/etc/systemd/system/consul.service.d/custom.conf'
+        drop_in='/etc/systemd/system/consul.service.d/auto-sysv-migration.conf'
         if [ -f /etc/default/consul -a ! -f "${drop_in}" ]; then
             # be on the safe side and source /etc/default/consul in a subshell
             (
