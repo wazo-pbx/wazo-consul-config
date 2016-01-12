@@ -21,6 +21,10 @@ if [ "${DEB_BUILD_ARCH}" = "i386" ]
 then
     ARCH=386
 fi
+if [ "${DEB_BUILD_ARCH}" = "armhf" ]
+then
+    ARCH=arm
+fi
 
 VERSION=$(cat VERSION)
 FILENAME=consul_${VERSION}_linux_${ARCH}.zip
