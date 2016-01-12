@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.6.0~xivo9) xivo-dev; urgency=medium
+
+  * add arm support
+
+ -- Sylvain Boily <sboily@avencall.com>  Tue, 12 Jan 2016 13:12:35 -0500
+
 xivo-consul-packaging (0.6.0~xivo8) xivo-dev; urgency=low
 
   * Switch from sysv to systemd.
