@@ -25,13 +25,15 @@ fi
 VERSION=$(cat VERSION)
 FILENAME=consul_${VERSION}_linux_${ARCH}.zip
 URL="https://releases.hashicorp.com/consul/${VERSION}/${FILENAME}"
+URL_SHA256="https://releases.hashicorp.com/consul/${VERSION}/consul_${VERSION}_SHA256SUMS"
 
 rm -rf tmp
 mkdir tmp
 cd tmp
 
 wget -nv -O "${FILENAME}" "${URL}"
-if ! sha256sum --status -c ../SHA256SUM_${ARCH} ; then
+curl -s ${URL_SHA256} | awk "/linux_${ARCH}/" > consul_${VERSION}_SHA256SUMS
+if ! sha256sum --status -c consul_${VERSION}_SHA256SUMS ; then
     echo "sha256sum did not match" >&2
     exit 1
 fi
