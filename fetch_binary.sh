@@ -20,8 +20,7 @@ ARCH=${DEB_BUILD_ARCH}
 if [ "${DEB_BUILD_ARCH}" = "i386" ]
 then
     ARCH=386
-fi
-if [ "${DEB_BUILD_ARCH}" = "armhf" ]
+elif [ "${DEB_BUILD_ARCH}" = "armhf" ]
 then
     ARCH=arm
 fi
