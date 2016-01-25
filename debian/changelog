@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.6.3~xivo1) xivo-dev; urgency=medium
+
+  * update to consul 0.6.3 (security issue)
+
+ -- Sylvain Boily <sboily@avencall.com>  Mon, 25 Jan 2016 07:32:51 -0500
+
 xivo-consul-packaging (0.6.1~xivo1) xivo-dev; urgency=medium
 
   * update consul to 0.6.1
