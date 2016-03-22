@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.6.4~xivo1) xivo-dev; urgency=medium
+
+  * update to consul 0.6.4
+
+ -- Sylvain Boily <sboily@proformatique.com>  Tue, 22 Mar 2016 08:34:18 -0400
+
 xivo-consul-packaging (0.6.3~xivo1) xivo-dev; urgency=medium
 
   * update to consul 0.6.3 (security issue)
