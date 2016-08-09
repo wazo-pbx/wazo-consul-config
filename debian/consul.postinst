@@ -21,19 +21,21 @@ case "$1" in
             rmdir "/usr/lib/consul"
         fi
 
-        # Add user consul
-        if ! getent passwd ${USER} > /dev/null ; then
-                echo "Adding system user for ${USER}" 1>&2
-                adduser --system --group --quiet \
-                        --shell /bin/sh \
-                        --home /var/lib/${USER} \
-                        --no-create-home --disabled-login \
-                        --gecos "Consul discovery service" \
-                        ${USER}
+        # add/update user
+        if ! getent passwd $USER > /dev/null ; then
+            echo "Adding system user $USER" 1>&2
+            adduser --quiet --system --group --no-create-home \
+                --home /var/lib/consul \
+                --gecos "Consul discovery service" \
+                $USER
+        else
+            if dpkg --compare-versions "$2" lt '0.6.4~xivo2'; then
+                usermod --shell /bin/false $USER
+            fi
         fi
 
         # Be able to read key/certificate for HTTPS
-        usermod -G www-data consul
+        adduser --quiet $USER www-data
 
         # Change ownership to consul:consul
         chown -R ${USER}:${GROUP} /etc/consul
