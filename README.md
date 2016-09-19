@@ -18,7 +18,7 @@ To install on Debian 8 (jessie):
 
 ```sh
 sudo sh -c "echo 'deb http://mirror.xivo.io/debian/ xivo-dev main' > /etc/apt/sources.list.d/xivo.list"
-sudo sh -c "wget http://mirror.xivo.fr/xivo_current.key -O - | apt-key add -"
+sudo sh -c "wget http://mirror.xivo.io/xivo_current.key -O - | apt-key add -"
 sudo apt-get update
 sudo apt-get install consul
 ```
