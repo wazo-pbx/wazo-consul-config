@@ -1,4 +1,4 @@
-xivo-consul-packaging (0.7.0~xivo1) UNRELEASED; urgency=medium
+xivo-consul-packaging (0.7.0~xivo2) xivo-dev; urgency=medium
 
   * Update consul to the latest version.
 
