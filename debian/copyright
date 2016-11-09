@@ -11,3 +11,6 @@ License: MPL-2.0
 
 Files: debian/*
 License: GPL-3
+
+Files: bin/*
+License: GPL-3
