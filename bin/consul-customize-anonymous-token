@@ -1,0 +1,27 @@
+#!/bin/sh
+# Copyright (C) 2016 Proformatique, Inc.
+# SPDX-License-Identifier: GPL-3.0+
+
+: ${CONFIG_DIR:=/etc/consul/xivo}
+
+http_port=$(grep '\"http\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
+https_port=$(grep '\"https\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
+if [ "$http_port" != "-1" ] ; then  # HTTP is not explicitly disabled
+    if [ -z "$http_port" ] ; then
+        port=8500
+        scheme="http"
+    fi
+else
+    if [ "${https_port}" != "" ] && [ "${https_port}" != "-1" ] ; then
+        port=$https_port
+        scheme="https"
+    else
+        echo "Cannot find consul's HTTP(s) port"
+        return 1
+    fi
+fi
+
+body='{"ID": "anonymous", "Rules": "service:xivo-:read"}'
+token=$(cat /var/lib/consul/master_token)
+url="${scheme}://localhost:${port}/v1/acl/update"
+curl -k -s ${url} -d ${body} -H "X-Consul-Token: ${token}"
