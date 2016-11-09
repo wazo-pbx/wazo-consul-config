@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright (C) 2016 Proformatique, Inc.
+# SPDX-License-Identifier: GPL-3.0+
 
 : ${CONFIG_DIR:=/etc/consul/xivo}
 : ${WAIT_FOR_LEADER:=yes}
