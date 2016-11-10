@@ -21,7 +21,7 @@ else
     fi
 fi
 
-body='{"ID": "anonymous", "Rules": "service:xivo-:read"}'
+body='{"ID": "anonymous", "Rules": "{\"service\": {\"xivo-\": {\"Policy\": \"read\"}}}"}'
 token=$(cat /var/lib/consul/master_token)
 url="${scheme}://localhost:${port}/v1/acl/update"
-curl -k -s ${url} -d ${body} -H "X-Consul-Token: ${token}"
+curl -k -s -o /dev/null -XPUT "${url}" -d "${body}" -H "X-Consul-Token: ${token}"

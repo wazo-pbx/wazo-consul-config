@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.7.0~xivo4) xivo-dev; urgency=medium
+
+  * fix customize-anonymous-token
+
+ -- Pascal Cadotte Michaud <pcadotte@proformatique.com>  Thu, 10 Nov 2016 13:04:45 -0500
+
 xivo-consul-packaging (0.7.0~xivo3) xivo-dev; urgency=medium
 
   * modify the anonymous token to allow service discovery
