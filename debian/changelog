@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.7.0~xivo3) xivo-dev; urgency=medium
+
+  * modify the anonymous token to allow service discovery
+
+ -- Pascal Cadotte Michaud <pcadotte@proformatique.com>  Wed, 09 Nov 2016 09:56:14 -0500
+
 xivo-consul-packaging (0.7.0~xivo2) xivo-dev; urgency=medium
 
   * Update consul to the latest version.
