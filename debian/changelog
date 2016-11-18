@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.7.1~xivo1) xivo-dev; urgency=medium
+
+  * update to consul 0.7.1.
+
+ -- Sylvain Boily <sboily@proformatique.com>  Fri, 18 Nov 2016 14:27:24 -0500
+
 xivo-consul-packaging (0.7.0~xivo4) xivo-dev; urgency=medium
 
   * fix customize-anonymous-token
