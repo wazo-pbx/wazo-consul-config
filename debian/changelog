@@ -1,4 +1,4 @@
-xivo-consul-packaging (0.7.1~1wazo) wazo-dev; urgency=medium
+xivo-consul-packaging (0.7.1~xivo2) wazo-dev; urgency=medium
 
   * update version
 
