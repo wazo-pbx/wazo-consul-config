@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.7.1~1wazo) wazo-dev; urgency=medium
+
+  * update version
+
+ -- Etienne Lessard <elessard97@gmail.com>  Tue, 29 Nov 2016 13:12:09 -0500
+
 xivo-consul-packaging (0.7.1~xivo1) xivo-dev; urgency=medium
 
   * update to consul 0.7.1.
