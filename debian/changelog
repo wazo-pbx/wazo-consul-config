@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.7.2~wazo1) wazo-dev; urgency=medium
+
+  * update to consul 0.7.2.
+
+ -- Sylvain Boily <sylvainboilydroid@gmail.com>  Thu, 22 Dec 2016 17:46:23 -0500
+
 xivo-consul-packaging (0.7.1~xivo2) wazo-dev; urgency=medium
 
   * update version
