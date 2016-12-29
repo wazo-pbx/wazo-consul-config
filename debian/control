@@ -1,7 +1,7 @@
 Source: xivo-consul-packaging
 Section: net
 Priority: optional
-Maintainer: XiVO Dev Team <dev@avencall.com>
+Maintainer: Wazo Maintainers <dev.wazo@gmail.com>
 Build-Depends: debhelper (>= 9), dh-systemd (>= 1.5), unzip, wget
 Standards-Version: 3.9.6
 
