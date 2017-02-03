@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.7.3~wazo1) wazo-dev; urgency=medium
+
+  * new upstream version 0.7.3
+
+ -- Wazo Maintainers <dev@wazo.community>  Fri, 03 Feb 2017 09:16:05 -0500
+
 xivo-consul-packaging (0.7.2~wazo2) wazo-dev; urgency=medium
 
   * update for Wazo
