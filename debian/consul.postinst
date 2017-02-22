@@ -68,7 +68,6 @@ case "$1" in
     "bootstrap_expect": 1,
     "rejoin_after_leave": true,
     "data_dir": "${DATA_DIR}",
-    "enable_syslog": true,
     "disable_update_check": true,
     "log_level": "INFO",
     "ports": {
@@ -120,6 +119,10 @@ EOF
                     systemctl daemon-reload || true
                 fi
             )
+        fi
+
+        if dpkg --compare-versions "$2" le '0.7.3~wazo1'; then
+            sed -i '/enable_syslog/d' ${DEFAULT_CONFIG}
         fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
