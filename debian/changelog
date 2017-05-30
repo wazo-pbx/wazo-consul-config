@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.8.3~wazo1) wazo-dev; urgency=medium
+
+  * update consul to 0.8.3
+
+ -- Sylvain Boily <sboily@wazo.community>  Mon, 29 May 2017 20:01:46 -0400
+
 xivo-consul-packaging (0.7.5~wazo1) wazo-dev; urgency=medium
 
   * update to consul 0.7.5
