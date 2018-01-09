@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.8.3~wazo4) wazo-dev; urgency=medium
+
+  * rebuild for stretch
+
+ -- Wazo Maintainers <dev+pkg@wazo.community>  Tue, 09 Jan 2018 14:28:29 -0500
+
 xivo-consul-packaging (0.8.3~wazo3) wazo-dev; urgency=medium
 
   * ACL add wazo-* services to the anonymous ACL
