@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.8.3~wazo6) wazo-dev; urgency=medium
+
+  * fix rules with variable DEB_BUILD_ARCH
+
+ -- Wazo Maintainers <dev+pkg@wazo.community>  Wed, 10 Jan 2018 08:32:31 -0500
+
 xivo-consul-packaging (0.8.3~wazo5) wazo-dev; urgency=medium
 
   * update packaging

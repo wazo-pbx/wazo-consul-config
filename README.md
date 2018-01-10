@@ -29,7 +29,7 @@ See the [documentation](http://documentation.wazo.community/en/latest/system/con
 To build on a test environment before submitting a change to production the following procedure can be used.
 
 ```sh
-DEB_BUILD_ARCH=amd64 make -f debian/rules get-orig-source
+make -f debian/rules get-orig-source
 tar -xvf ../xivo-consul-packaging_*.orig.zip  --strip 1
 dpkg-buildpackage -us -uc
 ```

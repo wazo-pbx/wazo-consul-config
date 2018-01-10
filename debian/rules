@@ -5,11 +5,11 @@
 #export DH_VERBOSE=1
 
 
-ARCH=${DEB_BUILD_ARCH}
-ifeq (${DEB_BUILD_ARCH},i386)
+ARCH = $(shell dpkg-architecture -q DEB_BUILD_ARCH)
+ifeq (${ARCH},i386)
     ARCH=386
 endif
-ifeq (${DEB_BUILD_ARCH},armhf)
+ifeq (${ARCH},armhf)
     ARCH=arm
 endif
 FILENAME=consul_${VERSION}_linux_${ARCH}.zip
