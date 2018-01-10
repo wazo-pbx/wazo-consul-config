@@ -23,14 +23,3 @@ sudo apt-get install consul
 ```
 
 See the [documentation](http://documentation.wazo.community/en/latest/system/consul.html) to use consul with your own configuration.
-
-## Building Locally
-
-To build on a test environment before submitting a change to production the following procedure can be used.
-
-```sh
-make -f debian/rules get-orig-source
-tar -xvf ../xivo-consul-packaging_*.orig.zip  --strip 1
-dpkg-buildpackage -us -uc
-```
-The `.deb` will be located in the parent directory.

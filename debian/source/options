@@ -1,1 +1,0 @@
-extend-diff-ignore = "(^|/)(\.gitignore|README.md|bin/.*|VERSION|AUTHORS)$"
