@@ -4,10 +4,31 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-override_dh_auto_build:
-	./fetch_binary.sh
+
+ARCH=${DEB_BUILD_ARCH}
+ifeq (${DEB_BUILD_ARCH},i386)
+    ARCH=386
+endif
+ifeq (${DEB_BUILD_ARCH},armhf)
+    ARCH=arm
+endif
+FILENAME=consul_${VERSION}_linux_${ARCH}.zip
+
+PKG = $(word 2,$(shell dpkg-parsechangelog | grep Source))
+VERSION ?= $(shell cat VERSION)
+TMP_DIR := $(shell mktemp -d)
+
+URL_DOWNLOAD = "https://releases.hashicorp.com/consul/${VERSION}/${FILENAME}"
 
 %:
 	dh $@ --with systemd
 
-.PHONY: build
+
+.PHONY: get-orig-source
+
+get-orig-source:
+	@echo "# Downloading..."
+	wget -nv -T10 -t3 $(URL_DOWNLOAD) -O ../$(PKG)_$(VERSION).zip
+	unzip ../$(PKG)_$(VERSION).zip -d $(TMP_DIR)
+	cp -r bin/* $(TMP_DIR)/
+	tar czf ../$(PKG)_$(VERSION).orig.tar.gz -C $(TMP_DIR) .
