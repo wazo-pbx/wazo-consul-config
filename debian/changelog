@@ -1,3 +1,9 @@
+xivo-consul-packaging (0.8.3~wazo8) wazo-dev-stretch; urgency=medium
+
+  * remove wrong reference to xivo-ctid
+
+ -- Wazo Maintainers <dev@wazo.community>  Wed, 06 Mar 2019 14:20:05 -0500
+
 xivo-consul-packaging (0.8.3~wazo7) wazo-dev; urgency=medium
 
   * add missing curl dependency
