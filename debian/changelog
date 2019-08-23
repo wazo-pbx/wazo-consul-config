@@ -1,3 +1,22 @@
+wazo-consul-config (1.0.2~wazo1) wazo-dev-buster; urgency=medium
+
+  * Rebuild
+
+ -- Wazo Maintainers <dev@wazo.community>  Fri, 23 Aug 2019 11:20:13 +0200
+
+wazo-consul-config (1.0.1) wazo-dev-buster; urgency=medium
+
+  * Rebuild 
+
+ -- Wazo Maintainers <dev@wazo.community>  Fri, 23 Aug 2019 11:13:41 +0200
+
+wazo-consul-config (1.0.0) wazo-dev-buster; urgency=medium
+
+  * Rename binary package to wazo-consul
+  * Depends on consul package instead of shipping consum
+
+ -- Wazo Maintainers <dev@wazo.community>  Fri, 23 Aug 2019 09:51:59 +0200
+
 xivo-consul-packaging (0.8.3~wazo8) wazo-dev-stretch; urgency=medium
 
   * remove wrong reference to xivo-ctid

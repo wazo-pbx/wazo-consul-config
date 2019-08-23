@@ -2,7 +2,7 @@
 # Copyright 2016-2017 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-: ${CONFIG_DIR:=/etc/consul/xivo}
+: ${CONFIG_DIR:=/etc/consul.d/}
 
 http_port=$(grep '\"http\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
 https_port=$(grep '\"https\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')

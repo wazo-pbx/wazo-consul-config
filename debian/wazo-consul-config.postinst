@@ -9,37 +9,14 @@ DATA_DIR="/var/lib/consul"
 MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
 DEFAULT_XIVO_CONSUL_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
 DEFAULT_XIVO_CONSUL_TOKEN="${DATA_DIR}/default_xivo_consul_token.yml"
-DEFAULT_CONFIG="/etc/consul/xivo/config.json"
+DEFAULT_CONFIG="/etc/consul.d/wazo-config.json"
 USER=consul
 GROUP=${USER}
 
 case "$1" in
     configure)
-        # In version < 15.12 consul data were in /usr/lib/consul
-        if [ -d "/usr/lib/consul" ]; then
-            mv /usr/lib/consul/* "${DATA_DIR}"
-            rmdir "/usr/lib/consul"
-        fi
-
-        # add/update user
-        if ! getent passwd $USER > /dev/null ; then
-            echo "Adding system user $USER" 1>&2
-            adduser --quiet --system --group --no-create-home \
-                --home /var/lib/consul \
-                --gecos "Consul discovery service" \
-                $USER
-        else
-            if dpkg --compare-versions "$2" lt '0.6.4~xivo2'; then
-                usermod --shell /bin/false $USER
-            fi
-        fi
-
         # Be able to read key/certificate for HTTPS
         adduser --quiet $USER www-data
-
-        # Change ownership to consul:consul
-        chown -R ${USER}:${GROUP} /etc/consul
-        chown -R ${USER}:${GROUP} ${DATA_DIR}
 
         # Create the master token file
         if [ ! -f ${MASTER_TOKEN_FILE} ]; then
@@ -101,31 +78,6 @@ consul:
     token: ${token}
 EOF
 
-        # systemd migration
-        drop_in='/etc/systemd/system/consul.service.d/auto-sysv-migration.conf'
-        if [ -f /etc/default/consul -a ! -f "${drop_in}" ]; then
-            # be on the safe side and source /etc/default/consul in a subshell
-            (
-                . /etc/default/consul
-                if [ "${WAIT_FOR_LEADER}" = no -o -n "${CONFIG_DIR}" ]; then
-                    mkdir -p $(dirname "${drop_in}")
-                    echo '[Service]' > "${drop_in}"
-                    if [ "${WAIT_FOR_LEADER}" = no ]; then
-                        echo "Environment=WAIT_FOR_LEADER=no" >> "${drop_in}"
-                    fi
-                    if [ -n "${CONFIG_DIR}" ]; then
-                        echo "Environment=CONFIG_DIR=${CONFIG_DIR}" >> "${drop_in}"
-                    fi
-
-                    systemctl daemon-reload || true
-                fi
-            )
-        fi
-
-        if dpkg --compare-versions "$2" le '0.7.3~wazo1'; then
-            sed -i '/enable_syslog/d' ${DEFAULT_CONFIG}
-            sed -i '/log_level/s/INFO/err/' ${DEFAULT_CONFIG}
-        fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
     ;;

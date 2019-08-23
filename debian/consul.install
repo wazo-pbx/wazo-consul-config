@@ -1,3 +1,0 @@
-tmp/consul usr/bin
-bin/consul-wait-leader usr/bin
-bin/consul-customize-anonymous-token usr/bin

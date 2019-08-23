@@ -1,15 +1,13 @@
-Source: xivo-consul-packaging
+Source: wazo-consul-config
 Section: net
 Priority: optional
 Maintainer: Wazo Maintainers <dev@wazo.community>
 Build-Depends: debhelper (>= 9), dh-systemd (>= 1.5), unzip, wget, curl
 Standards-Version: 3.9.6
 
-Package: consul
+Package: wazo-consul-config
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, adduser, awk, curl
-Description: Tool for discovering and configuring services
- Consul has multiple components, but as a whole, it is a tool for discovering and
- configuring services in your infrastructure. It provides several key features,
- service discovery, health checking, key/value store and multi datacenter.
+Depends: ${misc:Depends}, ${shlibs:Depends}, adduser, awk, curl, consul
+Description: Consul configuration for Wazo Platform
+ This is the Consul configuration for Wazo Platform
  .
