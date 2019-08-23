@@ -78,6 +78,8 @@ consul:
     token: ${token}
 EOF
 
+        systemctl daemon-reload
+        systemctl restart consul
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
     ;;
