@@ -1,6 +1,6 @@
 # The packaging information for consul in Wazo
 
-This repository contains the packaging information for [consul](www.consul.io).
+This repository contains the packaging information for [consul](https://www.consul.io).
 
 To get a new version of consul in the Wazo repository, set the desired version
 in the `VERSION` file and increment the version in the changelog file.
