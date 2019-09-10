@@ -6,9 +6,8 @@ DEFAULT_XIVO_CONSUL_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
 DEFAULT_XIVO_CONSUL_TOKEN="${DATA_DIR}/default_xivo_consul_token.yml"
 
 if [ "$1" = purge ]; then
-    rm -f /etc/consul.d/wazo-consul.hcl
+    rm -f /etc/consul.d/wazo-config.json
     rm -f ${MASTER_TOKEN_FILE} ${DEFAULT_XIVO_CONSUL_CONFIG} ${DEFAULT_XIVO_CONSUL_TOKEN}
-
 fi
 
 #DEBHELPER#
