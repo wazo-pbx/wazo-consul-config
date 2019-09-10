@@ -79,7 +79,7 @@ consul:
 EOF
 
         systemctl daemon-reload
-        systemctl restart consul
+        systemctl restart consul || true
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
     ;;
