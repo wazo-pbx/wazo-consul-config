@@ -59,7 +59,7 @@ case "$1" in
 }
 EOF
 
-        # Create the default config file for XiVO services
+        # Create the default config file for wazo services
         touch ${DEFAULT_XIVO_CONSUL_CONFIG}
         chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONSUL_CONFIG}
         chmod 640 ${DEFAULT_XIVO_CONSUL_CONFIG}
@@ -70,7 +70,7 @@ consul:
     port: 8500
     verify: /usr/share/xivo-certs/server.crt
 EOF
-        # Create the master token config file for XiVO services
+        # Create the master token config file for wazo services
         touch ${DEFAULT_XIVO_CONSUL_TOKEN}
         chown ${USER}:${GROUP} ${DEFAULT_XIVO_CONSUL_TOKEN}
         chmod 640 ${DEFAULT_XIVO_CONSUL_TOKEN}
