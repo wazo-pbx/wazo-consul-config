@@ -84,6 +84,9 @@ EOF
             rmdir --ignore-fail-on-non-empty /lib/systemd/system/consul.service.d/override.conf
         fi
 
+        # remove config from an old custom consul packaging
+        rm -rf /etc/consul/xivo
+
         systemctl daemon-reload
         systemctl restart consul || true
     ;;
