@@ -5,6 +5,7 @@
 
 set -e
 
+BROKEN_DROPIN_FILE="/lib/systemd/system/consul.service.d/override.conf/wazo-consul-config.conf"
 DATA_DIR="/var/lib/consul"
 MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
 DEFAULT_XIVO_CONSUL_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
@@ -77,6 +78,11 @@ EOF
 consul:
     token: ${token}
 EOF
+
+        if [ -e "${BROKEN_DROPIN_FILE}" ]; then
+            rm -f "${BROKEN_DROPIN_FILE}"
+            rmdir --ignore-fail-on-non-empty /lib/systemd/system/consul.service.d/override.conf
+        fi
 
         systemctl daemon-reload
         systemctl restart consul || true
