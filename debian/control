@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 9), dh-systemd (>= 1.5), unzip, wget, curl
 Standards-Version: 3.9.6
 
 Package: wazo-consul-config
-Architecture: any
+Architecture: all
 Depends: ${misc:Depends}, ${shlibs:Depends}, adduser, awk, curl, consul
 Description: Consul configuration for Wazo Platform
  This is the Consul configuration for Wazo Platform
