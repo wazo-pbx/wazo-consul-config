@@ -11,6 +11,7 @@ MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
 DEFAULT_XIVO_CONSUL_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
 DEFAULT_XIVO_CONSUL_TOKEN="${DATA_DIR}/default_xivo_consul_token.yml"
 DEFAULT_CONFIG="/etc/consul.d/wazo-config.json"
+PID_FILE="/var/run/consul/consul.pid"
 USER=consul
 GROUP=${USER}
 
@@ -47,6 +48,7 @@ case "$1" in
     "bootstrap_expect": 1,
     "rejoin_after_leave": true,
     "data_dir": "${DATA_DIR}",
+    "pid_file": "${PID_FILE}",
     "disable_update_check": true,
     "log_level": "err",
     "ports": {
