@@ -1,6 +1,6 @@
 Format: http://dep.debian.net/deps/dep5
 Upstream-Name: wazo-consul-config
-Source: https://github.com/wazo-pbx/wazo-consul-config.git
+Source: https://github.com/wazo-platform/wazo-consul-config.git
 
 Files: *
 Copyright: 2015-2019 The Wazo Authors

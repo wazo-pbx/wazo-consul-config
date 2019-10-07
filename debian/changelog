@@ -1,3 +1,9 @@
+wazo-consul-config (1.0.4) wazo-dev-buster; urgency=medium
+
+  * update wazo-pbx to wazo-platform
+
+ -- Wazo Maintainers <dev+pkg@wazo.community>  Tue, 01 Oct 2019 14:06:32 -0400
+
 wazo-consul-config (1.0.3) wazo-dev-buster; urgency=medium
 
   * Rebuild
