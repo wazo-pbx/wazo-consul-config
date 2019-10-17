@@ -89,8 +89,8 @@ EOF
         # remove config from wazo-19.12 (stretch)
         rm -rf /etc/consul/xivo
 
-        systemctl daemon-reload
-        systemctl restart consul || true
+        systemctl daemon-reload || true
+        deb-systemd-invoke restart consul || true
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
     ;;
