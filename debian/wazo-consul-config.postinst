@@ -90,7 +90,8 @@ EOF
         rm -rf /etc/consul/xivo
 
         systemctl daemon-reload || true
-        deb-systemd-invoke restart consul || true
+        deb-systemd-invoke enable consul.service || true
+        deb-systemd-invoke restart consul.service || true
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
     ;;
