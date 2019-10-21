@@ -1,3 +1,9 @@
+wazo-consul-config (19.15~20191021) wazo-dev-buster; urgency=medium
+
+  * enable consul
+
+ -- Wazo Maintainers <dev+pkg@wazo.community>  Mon, 21 Oct 2019 12:14:40 -0400
+
 wazo-consul-config (1.0.5) wazo-dev-buster; urgency=medium
 
   * Use /run instead of /var/run
