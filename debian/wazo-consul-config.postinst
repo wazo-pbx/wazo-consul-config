@@ -11,7 +11,7 @@ MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
 DEFAULT_XIVO_CONSUL_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
 DEFAULT_XIVO_CONSUL_TOKEN="${DATA_DIR}/default_xivo_consul_token.yml"
 DEFAULT_CONFIG="/etc/consul.d/wazo-config.json"
-PID_FILE="/var/run/consul/consul.pid"
+PID_FILE="/run/consul/consul.pid"
 USER=consul
 GROUP=${USER}
 
