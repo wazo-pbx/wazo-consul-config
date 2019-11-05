@@ -9,8 +9,10 @@ https_port=$(grep '\"https\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF
 if [ "$http_port" != "-1" ] ; then  # HTTP is not explicitly disabled
     if [ -z "$http_port" ] ; then
         port=8500
-        scheme="http"
+    else
+        port=$http_port
     fi
+    scheme="http"
 else
     if [ "${https_port}" != "" ] && [ "${https_port}" != "-1" ] ; then
         port=$https_port

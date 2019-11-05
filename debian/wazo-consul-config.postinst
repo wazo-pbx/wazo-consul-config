@@ -53,8 +53,8 @@ case "$1" in
     "log_level": "err",
     "ports": {
         "dns": -1,
-        "http": -1,
-        "https": 8500
+        "http": 8500,
+        "https": 8501
     },
     "cert_file": "/usr/share/xivo-certs/server.crt",
     "key_file": "/usr/share/xivo-certs/server.key"
@@ -69,7 +69,7 @@ EOF
 consul:
     scheme: https
     host: localhost
-    port: 8500
+    port: 8501
     verify: /usr/share/xivo-certs/server.crt
 EOF
         # Create the master token config file for wazo services
