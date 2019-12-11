@@ -7,7 +7,7 @@ Standards-Version: 3.9.6
 
 Package: wazo-consul-config
 Architecture: all
-Depends: ${misc:Depends}, ${shlibs:Depends}, adduser, awk, curl, consul, init-system-helpers
+Depends: ${misc:Depends}, ${shlibs:Depends}, adduser, curl, consul, init-system-helpers (>= 1.34)
 Description: Consul configuration for Wazo Platform
  This is the Consul configuration for Wazo Platform
  .
