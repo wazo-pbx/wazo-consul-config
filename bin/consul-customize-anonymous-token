@@ -1,26 +1,28 @@
 #!/bin/sh
-# Copyright 2016-2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 : ${CONFIG_DIR:=/etc/consul.d/}
 
 http_port=$(grep '\"http\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
 https_port=$(grep '\"https\":' ${CONFIG_DIR}/*.json | tail -n1 | awk '{print $NF}' | sed 's/,//')
-if [ "$http_port" != "-1" ] ; then  # HTTP is not explicitly disabled
-    if [ -z "$http_port" ] ; then
+if [ "${http_port}" != "-1" ] ; then  # HTTP is not explicitly disabled
+    if [ -z "${http_port}" ] ; then
         port=8500
     else
-        port=$http_port
+        port="${http_port}"
     fi
     scheme="http"
-else
-    if [ "${https_port}" != "" ] && [ "${https_port}" != "-1" ] ; then
-        port=$https_port
-        scheme="https"
+elif [ "${https_port}" != "-1" ] ; then
+    if [ -z "${https_port}" ] ; then
+        port=8501
     else
-        echo "Cannot find consul's HTTP(s) port"
-        return 1
+        port="${https_port}"
     fi
+    scheme="https"
+else
+    echo "Cannot find consul's HTTP(s) port"
+    return 1
 fi
 
 body='{"ID": "anonymous", "Rules": "{\"service\": {\"xivo-\": {\"Policy\": \"read\"}, \"wazo-\": {\"Policy\": \"read\"}}"}'
