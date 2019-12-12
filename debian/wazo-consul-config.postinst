@@ -67,10 +67,9 @@ EOF
         chmod 640 ${DEFAULT_XIVO_CONSUL_CONFIG}
         cat > ${DEFAULT_XIVO_CONSUL_CONFIG} <<EOF
 consul:
-    scheme: https
+    scheme: http
     host: localhost
-    port: 8501
-    verify: /usr/share/xivo-certs/server.crt
+    port: 8500
 EOF
         # Create the master token config file for wazo services
         touch ${DEFAULT_XIVO_CONSUL_TOKEN}
