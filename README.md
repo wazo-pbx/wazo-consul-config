@@ -23,3 +23,4 @@ sudo apt-get install consul
 ```
 
 See the [documentation](http://documentation.wazo.community/en/latest/system/consul.html) to use consul with your own configuration.
+
